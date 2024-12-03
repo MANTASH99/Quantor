@@ -1,0 +1,33 @@
+category	short32	textcat32	code32	short20	textcat20	code20	short12	textcat12	code12
+direct conversations	conv	face-to-face conversations	S1A-001-090	conv	conversations/phonecalls	S1A	priv	private	S1A
+distance conversations	phone	phonecalls	S1A-091-100	conv	conversations/phonecalls	S1A	priv	private	S1A
+class lessons	lesson	classroom lessons	S1B-001-020	lesson	classroom lessons	S1B1	public	public	S1B
+broadcast discussions	broadD	broadcast discussions	S1B-020-040	broadc	broadcast interactions	S1B2	public	public	S1B
+broadcast interviews	broadI	broadcast interviews	S1B-040-050	broadc	broadcast interactions	S1B2	public	public	S1B
+parliamentary debates	parl	parliamentary debates	S1B-050-060	parl	parliamentary debates	S1B3	public	public	S1B
+legal cross-examinations	crossEx	legal cross-examinations	S1B-060-070	crossEx	legal cross-examinations	S1B4	public	public	S1B
+business transactions	busiTr	business transactions	S1B-070-080	busiTr	business transactions	S1B5	public	public	S1B
+spontaneous commentaries	comm	spontaneous commentaries	S2A-001-020	unscr	unscripted monologues	S2A1	unscr	unscripted	S2A
+unscripted speeches	unscrS	unscripted speeches	S2A-021-050	unscr	unscripted monologues	S2A1	unscr	unscripted	S2A
+demonstrations	demo	demonstrations	S2A-051-060	demo	demonstrations	S2A2	unscr	unscripted	S2A
+legal presentations	legalP	legal presentations	S2A-061-070	legalP	legal presentations	S2A3	unscr	unscripted	S2A
+broadcast news	broadN	broadcast news	S2B-001-020	script	scripted monologues	S2B	script	scripted	S2B
+broadcast talks	broadT	broadcast talks	S2B-021-040	script	scripted monologues	S2B	script	scripted	S2B
+speeches (not broadcast)	scriptT	non-broadcast talks	S2B-041-050	script	scripted monologues	S2B	script	scripted	S2B
+student untimed essays	timedE	student essays	W1A-001-010	stuEss	student writing	W1A	stud	student writing	W1A
+student examination essays	examEs	exam scripts	W1A-011-020	stuEss	student writing	W1A	stud	student writing	W1A
+social letters	socLet	social letters	W1B-001-015	socLet	social letters	W1B1	letter	letters	W1B
+business letters	busLet	business letters	W1B-016-030	busLet	business letters	W1B2	letter	letters	W1B
+learned humanities	acadH	acad humanities	W2A-001-010	acad	academic writing	W2A	acad	academic writing	W2A
+learned social sciences	acadS	acad social sciences	W2A-011-020	acad	academic writing	W2A	acad	academic writing	W2A
+learned natural sciences	acadN	acad natural sciences	W2A-021-030	acad	academic writing	W2A	acad	academic writing	W2A
+learned technology	acadT	acad technology	W2A-031-040	acad	academic writing	W2A	acad	academic writing	W2A
+popular humanities	popH	pop humanities	W2B-001-010	popSci	popular-scientific writing	W2B	popSci	popular writing	W2B
+popular social sciences	popS	pop social sciences	W2B-011-020	popSci	popular-scientific writing	W2B	popSci	popular writing	W2B
+popular natural sciences	popN	pop natural sciences	W2B-021-030	popSci	popular-scientific writing	W2B	popSci	popular writing	W2B
+popular technology	popT	pop technology	W2B-031-040	popSci	popular-scientific writing	W2B	popSci	popular writing	W2B
+press news reports	news	press news reports	W2C-001-020	news	news reports	W2C	news	reportage	W2C
+administrative/regulatory	admin	administrative writing	W2D-001-010	admin	administrative writing	W2D1	instruc	instructional writing	W2D
+skills/hobbies	skills	skills / hobbies	W2D-011-020	skills	skills and hobbies	W2D2	instruc	instructional writing	W2D
+press editorials	prEdit	press editorials	W2E-001-010	prEdit	press editorials	W2E	prEdit	persuasive writing	W2E
+novels/stories	creat	novels and short stories	W2F-001-020	creat	creative writing	W2F	creat	creative writing	W2F
