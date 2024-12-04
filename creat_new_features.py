@@ -5,49 +5,50 @@ import numpy as np
 data = pd.read_csv('ICESING.csv', delimiter='\t')
 
 print(data.head())
-data['word_S'] = data['n_word'] / data['n_sent']
-data['lexical_density'] = data['ld'] / data['n_word']
-data['nn_W'] = data['nn'] / data['n_word']
-data['np_W'] = data['np'] / data['n_word']
-data['nominal_W'] = data['nom'] / data['n_word']
-data['neoclass_W'] = data['neo'] / data['n_word']
-data['poss_pronoun_W'] = data['poss'] / data['n_word']
-data['pronoun_all_W'] = data['pronoun'] / data['n_word']
-data['p1_perspron_P'] = data['p1'] / data['pronoun']
-data['p2_perspron_P'] = data['p2'] / data['pronoun']
-data['p3_perspron_P'] = data['p3'] / data['pronoun']
-data['it_P'] = data['pit'] / data['pronoun']
-data['pospers1_W'] = data['pospers1'] / data['n_word']
-data['pospers2_W'] = data['pospers2'] / data['n_word']
-data['pospers3_W'] = data['pospers3'] / data['n_word']
-data['adj_W'] = data['adj'] / data['n_word']
-data['atadj_W'] = data['atadj'] / data['n_word']
-data['predadj_W'] = (data['adj'] - data['atadj']) / data['n_word']
-data['prep_W'] = data['prep'] / data['n_word']
-data['finite_S'] = data['fin'] / data['n_sent']
-data['past_tense_F'] = data['past'] / data['fin']
-data['will_F'] = data['will'] / data['fin']
-data['modal_verb_V'] = data['vm'] / data['v']
-data['verb_W'] = data['v'] / data['n_word']
-data['infinitive_F'] = data['inf'] / data['fin']
-data['passive_F'] = data['pass'] / data['fin']
-data['coordination_F'] = data['coord'] / data['fin']
-data['subordination_F'] = data['subord'] / data['fin']
-data['interrogative_S'] = data['interr'] / data['n_sent']
-data['imperative_S'] = data['imper'] / data['n_sent']
-data['title_W'] = data['title'] / data['n_word']
-data['salutation_S'] = data['salutgreet'] / data['n_sent']
-data['place_adv_W'] = data['rl'] / data['n_word']
-data['time_adv_W'] = data['rt'] / data['n_word']
-data['nom_initial_S'] = data['nptheme'] / data['n_sent']
-data['prep_initial_S'] = data['pptheme'] / data['n_sent']
-data['adv_initial_S'] = data['advtheme'] / data['n_sent']
-data['text_initial_S'] = data['cctheme'] / data['n_sent']
-data['wh_initial_S'] = data['whtheme'] / data['n_sent']
-data['disc_initial_S'] = data['disctheme'] / data['n_sent']
-data['nonfin_initial_S'] = data['totheme'] / data['n_sent']
-data['subord_initial_S'] = data['subordtheme'] / data['n_sent']
-data['verb_initial_S'] = data['verbtheme'] / data['n_sent']
+data['word_S'] = np.where(data['n_sent'] != 0, data['n_word'] / data['n_sent'], 0)
+data['lexical_density'] = np.where(data['n_word'] != 0, data['ld'] / data['n_word'], 0)
+data['nn_W'] = np.where(data['n_word'] != 0, data['nn'] / data['n_word'], 0)
+data['np_W'] = np.where(data['n_word'] != 0, data['np'] / data['n_word'], 0)
+data['nominal_W'] = np.where(data['n_word'] != 0, data['nom'] / data['n_word'], 0)
+data['neoclass_W'] = np.where(data['n_word'] != 0, data['neo'] / data['n_word'], 0)
+data['poss_pronoun_W'] = np.where(data['n_word'] != 0, data['poss'] / data['n_word'], 0)
+data['pronoun_all_W'] = np.where(data['n_word'] != 0, data['pronoun'] / data['n_word'], 0)
+data['p1_perspron_P'] = np.where(data['pronoun'] != 0, data['p1'] / data['pronoun'], 0)
+data['p2_perspron_P'] = np.where(data['pronoun'] != 0, data['p2'] / data['pronoun'], 0)
+data['p3_perspron_P'] = np.where(data['pronoun'] != 0, data['p3'] / data['pronoun'], 0)
+data['it_P'] = np.where(data['pronoun'] != 0, data['pit'] / data['pronoun'], 0)
+data['pospers1_W'] = np.where(data['n_word'] != 0, data['pospers1'] / data['n_word'], 0)
+data['pospers2_W'] = np.where(data['n_word'] != 0, data['pospers2'] / data['n_word'], 0)
+data['pospers3_W'] = np.where(data['n_word'] != 0, data['pospers3'] / data['n_word'], 0)
+data['adj_W'] = np.where(data['n_word'] != 0, data['adj'] / data['n_word'], 0)
+data['atadj_W'] = np.where(data['n_word'] != 0, data['atadj'] / data['n_word'], 0)
+data['predadj_W'] = np.where(data['n_word'] != 0, (data['adj'] - data['atadj']) / data['n_word'], 0)
+data['prep_W'] = np.where(data['n_word'] != 0, data['prep'] / data['n_word'], 0)
+data['finite_S'] = np.where(data['n_sent'] != 0, data['fin'] / data['n_sent'], 0)
+data['past_tense_F'] = np.where(data['fin'] != 0, data['past'] / data['fin'], 0)
+data['will_F'] = np.where(data['fin'] != 0, data['will'] / data['fin'], 0)
+data['modal_verb_V'] = np.where(data['v'] != 0, data['vm'] / data['v'], 0)
+data['verb_W'] = np.where(data['n_word'] != 0, data['v'] / data['n_word'], 0)
+data['infinitive_F'] = np.where(data['fin'] != 0, data['inf'] / data['fin'], 0)
+data['passive_F'] = np.where(data['fin'] != 0, data['pass'] / data['fin'], 0)
+data['coordination_F'] = np.where(data['fin'] != 0, data['coord'] / data['fin'], 0)
+data['subordination_F'] = np.where(data['fin'] != 0, data['subord'] / data['fin'], 0)
+data['interrogative_S'] = np.where(data['n_sent'] != 0, data['interr'] / data['n_sent'], 0)
+data['imperative_S'] = np.where(data['n_sent'] != 0, data['imper'] / data['n_sent'], 0)
+data['title_W'] = np.where(data['n_word'] != 0, data['title'] / data['n_word'], 0)
+data['salutation_S'] = np.where(data['n_sent'] != 0, data['salutgreet'] / data['n_sent'], 0)
+data['place_adv_W'] = np.where(data['n_word'] != 0, data['rl'] / data['n_word'], 0)
+data['time_adv_W'] = np.where(data['n_word'] != 0, data['rt'] / data['n_word'], 0)
+data['nom_initial_S'] = np.where(data['n_sent'] != 0, data['nptheme'] / data['n_sent'], 0)
+data['prep_initial_S'] = np.where(data['n_sent'] != 0, data['pptheme'] / data['n_sent'], 0)
+data['adv_initial_S'] = np.where(data['n_sent'] != 0, data['advtheme'] / data['n_sent'], 0)
+data['text_initial_S'] = np.where(data['n_sent'] != 0, data['cctheme'] / data['n_sent'], 0)
+data['wh_initial_S'] = np.where(data['n_sent'] != 0, data['whtheme'] / data['n_sent'], 0)
+data['disc_initial_S'] = np.where(data['n_sent'] != 0, data['disctheme'] / data['n_sent'], 0)
+data['nonfin_initial_S'] = np.where(data['n_sent'] != 0, data['totheme'] / data['n_sent'], 0)
+data['subord_initial_S'] = np.where(data['n_sent'] != 0, data['subordtheme'] / data['n_sent'], 0)
+data['verb_initial_S'] = np.where(data['n_sent'] != 0, data['verbtheme'] / data['n_sent'], 0)
 
+# Step 2: Check for and handle Inf/NaN values in the calculated columns
 # Save the updated DataFrame back to a CSV file
 data.to_csv('updated_file.csv', index=False)
