@@ -47,8 +47,6 @@ data['wh_initial_S'] = np.where(data['n_sent'] != 0, data['whtheme'] / data['n_s
 data['disc_initial_S'] = np.where(data['n_sent'] != 0, data['disctheme'] / data['n_sent'], 0)
 data['nonfin_initial_S'] = np.where(data['n_sent'] != 0, data['totheme'] / data['n_sent'], 0)
 data['subord_initial_S'] = np.where(data['n_sent'] != 0, data['subordtheme'] / data['n_sent'], 0)
-data['verb_initial_S'] = np.where(data['n_sent'] != 0, data['verbtheme'] / data['n_sent'], 0)
 
-# Step 2: Check for and handle Inf/NaN values in the calculated columns
-# Save the updated DataFrame back to a CSV file
+data['verb_initial_S'] = np.where(data['n_sent'] != 0, data['verbtheme'] / data['n_sent'], 0)
 data.to_csv('updated_file.csv', index=False)

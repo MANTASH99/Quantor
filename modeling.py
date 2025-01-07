@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA 
 from sklearn.preprocessing import StandardScaler
 import plotly.express as px
-
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
 
 
 
@@ -19,7 +19,7 @@ import plotly.express as px
 #         elif len(parts) == 1:
 #             return float(parts[0])  # Handle strings without any periods
 #     return val
-data = pd.read_csv('Summed_new_features.csv', delimiter=',')
+data = pd.read_csv('summed_document_generalized.csv', delimiter=',')
 
 new_data = data.drop('group', axis=1)
 # for col in data.columns:
@@ -73,77 +73,132 @@ print(top_pc3)
 n_points = pca_result.shape[0]  # Total number of data points
 colors = []
 class_ranges = {
-    'Public': (1, 100),
-    'Creative Writing': (101, 177),
-    'Unscripted': (178, 246),
-    'Scripted': (247, 296),
-    'Student Writing': (297, 316),
-    'Letters': (317, 346),
-    'Academic Writing': (347, 386),
-    'Popular Writing': (387, 426),
-    'Reportage': (427, 446),
-    'Instructional Writing 1': (447, 466),
-    'Instructional Writing 2': (467, 476),
-    'Creative Writing (Others)': (477, None),  # For the rest of the points
+    'privat': (0, 118),
+    'public': (119, 204),
+    'Unscripted': (205, 290),
+    'Scripted': (291, 394),
+    'Student Writing': (395, 434),
+    'Letters': (435, 619),
+    'Academic Writing': (620, 664),
+    'Popular Writing': (665, 728),
+    'Reportage': (729, 789),
+    'Instructional Writing': (790, 866),
+    'persuasive writing': (867, 909),
+    'Creative Writing': (910, None)
 }
 
-# Map each index to its corresponding class and color
 colors = []
 labels = []
 
+# Assign colors based on ranges
 for i in range(len(pca_result)):
     for label, (start, end) in class_ranges.items():
-        if end is None:
-            if i >= start - 1:  # For the rest after the last defined range
-                colors.append('orange')  # Color for remaining class
-                labels.append(label)
-                break
-        else:
-            if start - 1 <= i < end:
-                if label == 'Public':
-                    colors.append('red')
-                elif label == 'Creative Writing':
-                    colors.append('blue')
-                elif label == 'Unscripted':
-                    colors.append('green')
-                elif label == 'Scripted':
-                    colors.append('purple')
-                elif label == 'Student Writing':
-                    colors.append('yellow')
-                elif label == 'Letters':
-                    colors.append('pink')
-                elif label == 'Academic Writing':
-                    colors.append('brown')
-                elif label == 'Popular Writing':
-                    colors.append('cyan')
-                elif label == 'Reportage':
-                    colors.append('magenta')
-                elif label == 'Instructional Writing 1':
-                    colors.append('lime')
-                elif label == 'Instructional Writing 2':
-                    colors.append('teal')
-                labels.append(label)
-                break
+        if end is None and i >= start - 1:
+            colors.append('orange')  # Default color for undefined range
+            labels.append(label)
+            break
+        elif start - 1 <= i < end:
+            color_map = {
+                'privat': 'red',
+                'public': 'blue',
+                'Unscripted': 'green',
+                'Scripted': 'purple',
+                'Student Writing': 'yellow',
+                'Letters': 'pink',
+                'Academic Writing': 'brown',
+                'Popular Writing': 'cyan',
+                'Reportage': 'magenta',
+                'Instructional Writing': 'lime',
+                'persuasive writing': 'teal'
+            }
+            colors.append(color_map.get(label, 'black'))  # Default to black if label not in color_map
+            labels.append(label)
+            break
 
-# 2D Visualization
+label_to_num = {label: idx for idx, label in enumerate(class_ranges.keys())}
+numeric_labels = [label_to_num[label] for label in labels]
+
+lda = LDA(n_components=3)  # Choose the number of components (max: n_classes - 1)
+lda_result = lda.fit_transform(pca_result, numeric_labels)
+
+
 plt.figure(figsize=(8, 6))
+plt.scatter(lda_result[:, 0], lda_result[:, 1], c=colors, edgecolor='k', s=50)
+plt.title('LDA - 2 Components')
+plt.xlabel('Linear Discriminant 1')
+plt.ylabel('Linear Discriminant 2')
+plt.grid()
 
-# Scatter plot with color labels
-scatter = plt.scatter(pca_result[:, 0], pca_result[:, 1], c=colors, edgecolor='k', s=50)
+# Add legend to the 2D plot
+handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=color, markersize=10, label=label) 
+           for label, color in zip(class_ranges.keys(), 
+                                   ['red', 'blue', 'green', 'purple', 'yellow', 
+                                    'pink', 'brown', 'cyan', 'magenta', 'lime', 'teal', 'orange'])]
+plt.legend(handles=handles, title="Classes", loc="best")
+
+# Save the 2D LDA plot
+plt.savefig('lda_2d_plot.png')
+print("2D LDA plot saved as 'lda_2d_plot.png'.")
+
+# Visualize LDA results in 3D (if 3 components are available)
+fig = plt.figure(figsize=(10, 8))
+ax = fig.add_subplot(111, projection='3d')
+scatter = ax.scatter(lda_result[:, 0], lda_result[:, 1], lda_result[:, 2], c=colors, edgecolor='k', s=50)
+ax.set_title('LDA - 3 Components')
+ax.set_xlabel('Linear Discriminant 1')
+ax.set_ylabel('Linear Discriminant 2')
+ax.set_zlabel('Linear Discriminant 3')
+
+# Add legend to the 3D plot
+handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=color, markersize=10, label=label) 
+           for label, color in zip(class_ranges.keys(), 
+                                   ['red', 'blue', 'green', 'purple', 'yellow', 
+                                    'pink', 'brown', 'cyan', 'magenta', 'lime', 'teal', 'orange'])]
+ax.legend(handles=handles, title="Classes", loc="best")
+
+# Save the 3D LDA plot
+plt.savefig('lda_3d_plot.png')
+print("3D LDA plot saved as 'lda_3d_plot.png'.")
+
+# Optional: Interactive LDA Visualization using Plotly
+import plotly.express as px
+lda_df = pd.DataFrame(lda_result, columns=['LD1', 'LD2', 'LD3'])
+lda_df['Color'] = labels
+
+fig = px.scatter_3d(lda_df, x='LD1', y='LD2', z='LD3', color='Color', 
+                    title="3D LDA Plot", 
+                    labels={'LD1': 'Linear Discriminant 1', 'LD2': 'Linear Discriminant 2', 'LD3': 'Linear Discriminant 3'})
+
+# Save the interactive plot as an HTML file
+fig.write_html("lda_3d_interactive_plot.html")
+print("3D LDA interactive plot saved as 'lda_3d_interactive_plot.html'.")
+
+# Show the interactive plot
+fig.show()
+
+# Explained variance ratio for LDA components
+lda_explained_variance = lda.explained_variance_ratio_
+print(f"Explained variance by each LDA component: {lda_explained_variance}")
+
+
+
+
+# 2D PCA Scatter Plot
+plt.figure(figsize=(8, 6))
+plt.scatter(pca_result[:, 0], pca_result[:, 1], c=colors, edgecolor='k', s=50)
 plt.title('PCA - 2 Components')
 plt.xlabel('Principal Component 1')
 plt.ylabel('Principal Component 2')
 plt.grid()
 
-# Add a legend manually
+# Add legend
 handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=color, markersize=10, label=label) 
-           for color, label in zip(
-               ['red', 'blue', 'green', 'purple', 'yellow', 'pink', 'brown', 'cyan', 'magenta', 'lime', 'teal'],
-               class_ranges.keys())]
-plt.legend(handles=handles, title="Classes")
+           for label, color in zip(class_ranges.keys(), ['red', 'blue', 'green', 'purple', 'yellow', 
+                                                        'pink', 'brown', 'cyan', 'magenta', 'lime', 'teal', 'orange'])]
+plt.legend(handles=handles, title="Classes", loc="best")
 
-# Save the 2D plot
-plt.savefig('pca_2d_plot.png')  # Save the 2D plot
+# Save and display the plot
+plt.savefig('pca_2d_plot.png')
 print("2D PCA plot saved as 'pca_2d_plot.png'.")
 
 # For 3D Visualization
