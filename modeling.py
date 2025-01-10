@@ -20,7 +20,7 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
 #             return float(parts[0])  # Handle strings without any periods
 #     return val
 
-data = pd.read_csv('summed_document_generalized.csv', delimiter=',')
+data = pd.read_csv('updated_file_ICESING_summed.csv', delimiter=',')
 
 new_data = data.drop('group', axis=1)
 # for col in data.columns:
@@ -138,7 +138,7 @@ handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=color, ma
 plt.legend(handles=handles, title="Classes", loc="best")
 
 # Save the 2D LDA plot
-plt.savefig('lda_2d_plot.png')
+plt.savefig('lda_2d_plot_ING.png')
 print("2D LDA plot saved as 'lda_2d_plot.png'.")
 
 # Visualize LDA results in 3D (if 3 components are available)
@@ -158,7 +158,7 @@ handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=color, ma
 ax.legend(handles=handles, title="Classes", loc="best")
 
 # Save the 3D LDA plot
-plt.savefig('lda_3d_plot.png')
+plt.savefig('lda_3d_plot_ING.png')
 print("3D LDA plot saved as 'lda_3d_plot.png'.")
 
 # Optional: Interactive LDA Visualization using Plotly
@@ -199,7 +199,7 @@ handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=color, ma
 plt.legend(handles=handles, title="Classes", loc="best")
 
 # Save and display the plot
-plt.savefig('pca_2d_plot.png')
+plt.savefig('pca_2d_plot_ING.png')
 print("2D PCA plot saved as 'pca_2d_plot.png'.")
 
 # For 3D Visualization
@@ -221,7 +221,7 @@ handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=color, ma
 ax.legend(handles=handles, title="Classes")
 
 # Save the 3D plot
-fig.savefig('pca_3d_plot.png')  # Save the 3D plot
+fig.savefig('pca_3d_plot_ING.png')  # Save the 3D plot
 print("3D PCA plot saved as 'pca_3d_plot.png'.")
 
 # Show the plot (optional, comment this if you are running in a non-interactive environment)
