@@ -3,7 +3,7 @@ import cv2
 import pandas as pd
 
 
-df = pd.read_csv('ICESING.csv', delimiter='\t')
+df = pd.read_csv('ICESING.tsv', delimiter='\t')
 
 # Step 2: Get the list of column names
 columns = df.columns.to_list()
