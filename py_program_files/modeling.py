@@ -20,7 +20,7 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
 #             return float(parts[0])  # Handle strings without any periods
 #     return val
 
-data = pd.read_csv('updated_file_ICEPHI_summed.csv', delimiter=',')
+data = pd.read_csv('/home/hussein/Quantor/csv_files/updated_file_ICESING_summed.csv', delimiter=',')
 
 new_data = data.drop('group', axis=1)
 # for col in data.columns:
@@ -37,7 +37,7 @@ print(data.dtypes)
 # Check for NaN values
 
 
-# Check for infinite values
+# Check for infinite valueps
 
 
 
@@ -74,18 +74,18 @@ print(top_pc3)
 n_points = pca_result.shape[0]  # Total number of data points
 colors = []
 class_ranges = {
-    'privat': (0, 102),
-    'public': (103, 187),
-    'Unscripted': (188, 406),
-    'Scripted': (407, 491),
-    'Student Writing': (492, 539),
-    'Letters': (540, 716),
-    'Academic Writing': (717, 758),
-    'Popular Writing': (759, 836),
-    'Reportage': (837, 923),
-    'Instructional Writing': (924, 961),
-    'persuasive writing': (962, 1003),
-    'Creative Writing': (1004, None)
+    'privat': (0, 118),
+    'public': (119, 204),
+    'Unscripted': (205, 290),
+    'Scripted': (291, 394),
+    'Student Writing': (395, 434),
+    'Letters': (435, 619),
+    'Academic Writing': (620, 664),
+    'Popular Writing': (665, 728),
+    'Reportage': (729, 789),
+    'Instructional Writing': (790, 866),
+    'persuasive writing': (867, 909),
+    'Creative Writing': (910, None)
 }
 
 colors = []
@@ -138,7 +138,7 @@ handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=color, ma
 plt.legend(handles=handles, title="Classes", loc="best")
 
 # Save the 2D LDA plot
-plt.savefig('lda_2d_plot_PHI.png')
+plt.savefig('lda_2d_plot_ING.png')
 print("2D LDA plot saved as 'lda_2d_plot.png'.")
 
 # Visualize LDA results in 3D (if 3 components are available)
@@ -158,7 +158,7 @@ handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=color, ma
 ax.legend(handles=handles, title="Classes", loc="best")
 
 # Save the 3D LDA plot
-plt.savefig('lda_3d_plot_PHI.png')
+plt.savefig('lda_3d_plot_ING.png')
 print("3D LDA plot saved as 'lda_3d_plot.png'.")
 
 # Optional: Interactive LDA Visualization using Plotly
@@ -171,7 +171,7 @@ fig = px.scatter_3d(lda_df, x='LD1', y='LD2', z='LD3', color='Color',
                     labels={'LD1': 'Linear Discriminant 1', 'LD2': 'Linear Discriminant 2', 'LD3': 'Linear Discriminant 3'})
 
 # Save the interactive plot as an HTML file
-fig.write_html("lda_3d_interactive_plot_PHI.html")
+fig.write_html("lda_3d_interactive_plot_ING.html")
 print("3D LDA interactive plot saved as 'lda_3d_interactive_plot.html'.")
 
 # Show the interactive plot
@@ -199,7 +199,7 @@ handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=color, ma
 plt.legend(handles=handles, title="Classes", loc="best")
 
 # Save and display the plot
-plt.savefig('pca_2d_plot_PHI.png')
+plt.savefig('pca_2d_plot_ING.png')
 print("2D PCA plot saved as 'pca_2d_plot.png'.")
 
 # For 3D Visualization
@@ -221,7 +221,7 @@ handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=color, ma
 ax.legend(handles=handles, title="Classes")
 
 # Save the 3D plot
-fig.savefig('pca_3d_plot_PHI.png')  # Save the 3D plot
+fig.savefig('pca_3d_plot_ING.png')  # Save the 3D plot
 print("3D PCA plot saved as 'pca_3d_plot.png'.")
 
 # Show the plot (optional, comment this if you are running in a non-interactive environment)
@@ -240,4 +240,4 @@ fig = px.scatter_3d(df, x='PC1', y='PC2', z='PC3', color='Color',
 fig.show()
 
 # Optionally save the interactive plot as an HTML file
-fig.write_html("pca_3d_interactive_plot_PHI.html")
+fig.write_html("pca_3d_interactive_plot_ING.html")
